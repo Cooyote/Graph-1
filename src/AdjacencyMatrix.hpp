@@ -424,7 +424,7 @@ namespace Graph
         {
             for(int i = 0; i < num_vertices; i++)
             {
-                for(int j = 0; j < num_vertices; j++)
+                for(int j = 1; j < num_vertices; j++)
                 {
                     const short tmp = matrix[i * num_vertices + j].edge;
                     matrix[i * num_vertices + j].edge = matrix[j * num_vertices + i].edge;
