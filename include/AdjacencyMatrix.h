@@ -40,7 +40,7 @@ namespace Graph
 		vertice *matrix;
 		void visit(int, short*);
 		void visit_conex(int, int, short*);
-
+                void bellman_ford_pass(int*);
 	public:
 		AdjacencyMatrix();
 		AdjacencyMatrix(int);
@@ -54,6 +54,7 @@ namespace Graph
 		int getDegree(int);
 		int getEnterDegree(int);
 		int getOutDegree(int);
+                int bellman_ford(int, int);
 
 		bool hasEdge(int, int);
 		bool isRegular();
