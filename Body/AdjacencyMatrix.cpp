@@ -93,10 +93,10 @@ namespace Graph
     for(int i = 0; i < numVertices; i++)
     {
       grau = enterDegreeVertice[i] + outDegreeVertice[i];
-      if (grau == 0)
-      return true;
+      if (grau != 0)
+      return false;
     }
-    return false;
+    return true;
   }
 
   //check Complete graph
