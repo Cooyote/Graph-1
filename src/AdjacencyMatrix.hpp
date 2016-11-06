@@ -223,6 +223,7 @@ namespace Graph
         bool resp = true;
 
         short *visited_vertices = (short*) malloc(num_vertices * sizeof(short));
+        memset(visited_vertices, 0, sizeof(short)*this->num_vertices);
 
         int val = 0;
         for(int i = 0; i< num_vertices; i++)
@@ -301,6 +302,7 @@ namespace Graph
         bool resp = true;
 
         int degrees[this->num_vertices];
+        memset(degrees, 0, sizeof(int)*this->num_vertices);
 
         for(int i = 0; i< this->num_vertices; i++)
         {
@@ -321,6 +323,8 @@ namespace Graph
 
         int degrees[this->num_vertices];
 
+        memset(degrees, 0, sizeof(int)*this->num_vertices);
+
         for(int i = 0; i< this->num_vertices; i++)
         {
             degrees[i] = this->getDegree(i) % 2;
@@ -337,10 +341,11 @@ namespace Graph
     bool AdjacencyMatrix::isCircuit(int list[], int n)
     {
         bool resp = this->isClosePath(list, n);
-
         int frequency[this->num_vertices];
-
-        for(int i = 0; i< n && resp; i++)
+        
+        memset(frequency, 0, sizeof(int)*this->num_vertices);
+        
+        for(int i = 0; i< n-1 && resp; i++)
         {
             frequency[list[i]]++;
         }
@@ -376,12 +381,12 @@ namespace Graph
 
     bool AdjacencyMatrix::isOpenPath(int list[], int n)
     {
-        return (this->isPath(list, n)) && (list[0] != list[n-1]);
+        return (this->isPath(list, n-1)) && (list[0] != list[n-1]);
     }
 
     bool AdjacencyMatrix::isClosePath(int list[], int n)
     {
-        return (this->isPath(list, n)) && (list[0] == list[n-1]);
+        return (this->isPath(list, n-1)) && (list[0] == list[n-1]);
     }
 
     void AdjacencyMatrix::print()
