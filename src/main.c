@@ -42,9 +42,7 @@ int main(int argc, char** argv)
     am->PrintIsCircular();
     am->PrintIsLonelyVertice(1);
     am->PrintIsPendingVertice(1);
-
     int path [7] = {0,1,2,3,4,5,0};
-
     am->PrintIsPath(path,7);
     am->PrintIsOpenPath(path,7);
     am->PrintIsClosePath(path,7);
@@ -54,6 +52,7 @@ int main(int argc, char** argv)
     am->PrintTranspose();
     am->PrintBFS(5);
     am->PrintDFS(1);
+    am->PrintBelmanFord(0,5);
 
     return 0;
 }

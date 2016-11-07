@@ -507,13 +507,12 @@ namespace Graph
     {
       currentVertice = verticesToVisit.front();
       for (int i = 0; i < numVertices; i++)
-      {
         if (matrixAdj[currentVertice * numVertices + i].hasEdge == 1 && visitedVertices[i] == 0)
         {
           verticesToVisit.push(i);
           visitedVertices[i] = 1;
         }
-      }
+
       orderVisitedVertices.push(currentVertice);
       verticesToVisit.pop();
     }
@@ -542,12 +541,9 @@ namespace Graph
     order.push(vertice);
 
     for(int i = 0; i < numVertices; i++)
-    {
       if(visitedVertices[i] == 0 && matrixAdj[vertice * numVertices + i].hasEdge)
-      {
         order = visit(i, visitedVertices,order);
-      }
-    }
+
     return order;
   }
 
@@ -557,15 +553,55 @@ namespace Graph
     if (IsConnect() && IsEulerGraph() && IsBipartite())
     {
       for (int i = 0; i < numVertices; i++)
-      {
         if(!(enterDegreeVertice[i] == 2))
-        return false;
-      }
+          return false;
 
       return true;
-
     }
     return false;
   }
 
+  //BellmanFord
+  int AdjacencyMatrix::BellmanFord(int begin, int end)
+  {
+    int dists[numVertices];
+    int cmp[numVertices];
+
+    for(int i = 0; i < numVertices; i++)
+    {
+      dists[i] = MAXINT;
+      cmp[i] = 0;
+    }
+
+    dists[begin] = 0; // start position
+
+    for(int c = 1; c <= numVertices -1; c++)
+      BellmanFordPass(dists);
+
+    memcpy(&cmp, &dists, sizeof(dists));
+
+    BellmanFordPass(dists);
+
+    for(int i = 0; i < numVertices; i++)
+      if(dists[i] != cmp[i])
+        return -1;
+
+    return dists[end];
+  }
+
+  void AdjacencyMatrix::BellmanFordPass(int* data)
+  {
+    for(int i = 0; i < numVertices; i++)
+      if(data[i] < MAXINT)
+        for(int j = 0; j < numVertices; j++)
+          if(matrixAdj[i * numVertices + j].hasEdge)
+            if(matrixAdj[i * numVertices + j].value + data[i] < data[j])
+              data[j] = matrixAdj[i * numVertices + j].value + data[i];
+  }
+
+  AdjacencyMatrix::~AdjacencyMatrix()
+  {
+    matrixAdj = NULL;
+    free(matrixAdj);
+  }
 }

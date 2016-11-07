@@ -259,4 +259,15 @@ namespace Graph
     printf("\n\n");
   }
 
+  //Print BellmanFord
+  void AdjacencyMatrix::PrintBelmanFord(int begin,int end)
+  {
+    printf("BellmanFord path : ");
+    int result = BellmanFord(begin,end);
+    if(result == -1)
+    printf("Graph contains a negative-weight cycle.\n\n");
+    else
+    printf("%d\n",result);
+  }
+
 }

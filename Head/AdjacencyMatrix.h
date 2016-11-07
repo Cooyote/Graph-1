@@ -5,6 +5,7 @@
 #include <queue>
 
 #define EMPTY 0
+#define MAXINT 2147483647
 
 
 namespace Graph
@@ -43,6 +44,7 @@ namespace Graph
     bool IsUnicursal();
 
     int GetNComponents(int,bool*);
+    int  BellmanFord(int,int);
 
     short GetDegree(int);
     short GetEnterDegree(int);
@@ -51,6 +53,8 @@ namespace Graph
     std::queue<int> BFS(int);
     std::queue<int> DFS(int);
     std::queue<int> visit(int,bool*,std::queue<int>);
+
+    void BellmanFordPass(int*);
 
     AdjacencyMatrix* GetComplement();
     AdjacencyMatrix* Transpose();
@@ -93,6 +97,7 @@ namespace Graph
     void PrintTranspose();
     void PrintBFS(int);
     void PrintDFS(int);
+    void PrintBelmanFord(int,int);
 
     ~AdjacencyMatrix();
   };
